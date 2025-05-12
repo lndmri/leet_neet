@@ -20,24 +20,36 @@
 # Input: nums = [3,3], target = 6
 # Output: [0,1]
 
-
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
         
-        # We will keep a dictionary with the differences of each eleement in the array
-        differences = dict()
-        
-        # First pass to populate the dictionary
+        # Best solution: just one pass
+        prevMap = {} #num:index
+
+        # for each number in the list and its enumeration
         for i, num in enumerate(nums):
-            differences[target - num] = i
+            diff = target - num # we want to know if the diff is in the map already
+            if diff in prevMap:
+                return [prevMap[diff],i]
+            prevMap[num] = i    # if it is not in the map we then add the num and its index to the map
 
-        print(differences)
 
-        # Second pass to get the solution.
-        for i in range(len(nums)):
-            sol = differences.get(nums[i])
-            if sol != None and sol != i:
-                return [i, sol]
+        # Second best solution: two passes over the list
+       
+        # # We will keep a dictionary with the differences of each eleement in the array
+        # differences = dict()
+        
+        # # First pass to populate the dictionary
+        # for i, num in enumerate(nums):
+        #     differences[target - num] = i
+
+        # print(differences)
+
+        # # Second pass to get the solution.
+        # for i in range(len(nums)):
+        #     sol = differences.get(nums[i])
+        #     if sol != None and sol != i:
+        #         return [i, sol]
 
 
         # naive solution 
