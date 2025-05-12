@@ -21,3 +21,27 @@
 # Output: [0,1]
 
 
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        
+        # We will keep a dictionary with the differences of each eleement in the array
+        differences = dict()
+        
+        # First pass to populate the dictionary
+        for i, num in enumerate(nums):
+            differences[target - num] = i
+
+        print(differences)
+
+        # Second pass to get the solution.
+        for i in range(len(nums)):
+            sol = differences.get(nums[i])
+            if sol != None and sol != i:
+                return [i, sol]
+
+
+        # naive solution 
+        # for i in range(0, len(nums)):
+        #     for j in range(i + 1, len(nums)):
+        #         if nums[i] + nums [j] == target:
+        #             return [i,j]
